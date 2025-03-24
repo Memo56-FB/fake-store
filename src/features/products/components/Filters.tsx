@@ -3,8 +3,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import useProducts from "./hooks/useProducts"
-import { renderRating } from "./utils/renderRating"
+import useProducts from "../hooks/useProducts"
+import { renderRating } from "../utils/renderRating"
 
 export default function ProductFilters() {
   const {

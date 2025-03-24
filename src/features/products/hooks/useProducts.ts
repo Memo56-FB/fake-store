@@ -8,9 +8,10 @@ const useProducts = () => {
   const products = useProductsStore(state => state.products)
   const setFilteredProducts = useProductsStore(state => state.setFilteredProducts)
 
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data, isLoading, isSuccess, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: getAllProducts,
+    refetchOnMount: false
   })
 
   useEffect(() => {
@@ -74,6 +75,7 @@ const useProducts = () => {
     setPriceRange,
     ratingFilter,
     setRatingFilter,
+    refetch
   }
 
 }
