@@ -3,8 +3,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Star } from "lucide-react"
 import useProducts from "./hooks/useProducts"
+import { renderRating } from "./utils/renderRating"
 
 export default function ProductFilters() {
   const {
@@ -21,18 +21,6 @@ export default function ProductFilters() {
 
   const minPrice = 0
   const maxPrice = 1000
-
-  // Render star rating
-  const renderRating = (rating: number) => {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${i < rating ? "fill-primary text-primary" : "fill-muted text-muted-foreground"}`}
-        />
-      ))
-  }
 
   return (
     <div className="px-4 py-8 relative">
@@ -107,7 +95,7 @@ export default function ProductFilters() {
                 <RadioGroupItem value="0" id="rating-0" />
                 <Label htmlFor="rating-0">Todas las calificaciones</Label>
               </div>
-              {[1, 2, 3, 4, 5].map((rating) => (
+              {[1, 2, 3, 4].map((rating) => (
                 <div key={rating} className="flex items-center space-x-2">
                   <RadioGroupItem value={rating.toString()} id={`rating-${rating}`} />
                   <Label htmlFor={`rating-${rating}`} className="flex items-center">

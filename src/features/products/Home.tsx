@@ -1,26 +1,16 @@
 import { Link } from "react-router"
 import ProductFilters from "./Filters"
-import { Star } from "lucide-react"
 import { useProductsStore } from "./productsStore"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useMediaQuery } from 'usehooks-ts'
 import { FiltersDrawer } from "./FiltersDrawer"
+import { renderRating } from "./utils/renderRating"
 
 export const Home = () => {
   const filteredProducts = useProductsStore(state => state.filteredProducts)
   // const { isLoading } = useProducts()
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
-  const renderRating = (rating: number) => {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-primary text-primary" : "fill-muted text-muted-foreground"}`}
-        />
-      ))
-  }
   return (
     <section className="grid min-h-screen">
       <div className="bg-[url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] grayscale-25 bg-center bg-cover grid h-96 place-items-center">
