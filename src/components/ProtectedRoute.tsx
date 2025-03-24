@@ -1,3 +1,4 @@
+import { Layout } from "@/features/layout/Layout";
 import { Navigate, Outlet } from "react-router";
 
 type ProtectedRouteProps = {
@@ -10,5 +11,9 @@ export const ProtectedRoute = ({ token, redirectPath = "/login" }: ProtectedRout
     return <Navigate to={redirectPath} replace />;
   }
 
-  return <Outlet />;
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
+  )
 };

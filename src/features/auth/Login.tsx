@@ -14,7 +14,7 @@ import useLogin from "./hooks/useLogin"
 import { Link } from "react-router"
 
 export const Login = () => {
-  const { form, onSubmit} = useLogin()
+  const { form, onSubmit, isPending} = useLogin()
 
   return (
     <main className="flex flex-col p-4 pt-1 h-dvh bg-gray-50 justify-center">
@@ -52,7 +52,7 @@ export const Login = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">Iniciar sesión</Button>
+              <Button type="submit" className="w-full" isLoading={isPending}>Iniciar sesión</Button>
               <div className="grid grid-cols-[3fr_1fr_2fr] gap-4 text-center">
                 <Link to="/reset-password" className="font-semibold text-red-600">¿Olvidaste tu contraseña?</Link>
                 <p>|</p>

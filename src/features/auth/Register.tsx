@@ -16,7 +16,7 @@ import { Link } from "react-router"
 
 
 export const Register = () => {
-  const { form, onSubmit } = useRegister();
+  const { form, onSubmit, isPending } = useRegister();
 
   return (
     <main className="flex flex-col p-4 pt-1 h-dvh bg-gray-50 justify-center">
@@ -68,7 +68,7 @@ export const Register = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">Registrarse</Button>
+              <Button type="submit" className="w-full" isLoading={isPending}>Registrarse</Button>
               <p>
                 ¿Ya tienes una cuenta? <Link to="/login" className="font-semibold text-red-600">Acceder</Link>
               </p>
