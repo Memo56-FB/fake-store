@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { useProductsStore } from "../productsStore"
+import { useFilterProductsStore, useProductsStore } from "../productsStore"
 import { getAllProducts } from "../productsServices"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo } from "react"
 
 const useProducts = () => {
   const setProducts = useProductsStore(state => state.setProducts)
@@ -16,45 +16,51 @@ const useProducts = () => {
   useEffect(() => {
     if (isSuccess) {
       setProducts(data)
+      setFilteredProducts(data)
     }
-  },[data, isSuccess, setProducts])
-  const categories = [...new Set(products?.map((product) => product.category))]
+  },[data, isSuccess, setProducts, setFilteredProducts])
 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-  const [priceSort, setPriceSort] = useState<string>("none")
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000])
-  const [ratingFilter, setRatingFilter] = useState<number>(0)
+  // ? Filters
+  const selectedCategories = useFilterProductsStore(state => state.selectedCategories)
+  const priceSort = useFilterProductsStore(state => state.priceSort)
+  const setPriceSort = useFilterProductsStore(state => state.setPriceSort)
+  const priceRange = useFilterProductsStore(state => state.priceRange)
+  const setPriceRange = useFilterProductsStore(state => state.setPriceRange)
+  const ratingFilter = useFilterProductsStore(state => state.ratingFilter)
+  const setRatingFilter = useFilterProductsStore(state => state.setRatingFilter)
+  const handleCategoryChange = useFilterProductsStore(state => state.handleCategoryChange)
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category],
-    )
-  }
+  const categories = useMemo(() => [...new Set(products?.map((product) => product.category))], [products])
+
 
   const filteredProducts = useMemo(() => {
     let result = products ? [...products] : []
 
-    // Filtrar por categoría
+    //? Filtrar por categoría
     if (selectedCategories?.length > 0) {
       result = result.filter((product) => selectedCategories.includes(product.category));
     }
 
-    // Filtrar por rango de precios
+    //? Filtrar por rango de precios
     result = result.filter((product) => product.price >= priceRange[0] && product.price <= priceRange[1]);
 
-    // Filtrar por calificación
+    //? Filtrar por calificación
     if (ratingFilter > 0) {
       result = result.filter((product) => product.rating.rate >= ratingFilter);
     }
 
-    // Ordenar por precio
+    //? Ordenar por precio
     if (priceSort === "asc") {
       result.sort((a, b) => a.price - b.price);
     } else if (priceSort === "desc") {
       result.sort((a, b) => b.price - a.price);
     }
-    setFilteredProducts(result)
-  }, [selectedCategories, priceSort, priceRange, ratingFilter, products, setFilteredProducts]);
+    return result
+  }, [products, selectedCategories, priceRange, ratingFilter, priceSort]);
+
+  useEffect(() => {
+    setFilteredProducts(filteredProducts)
+  }, [filteredProducts, setFilteredProducts])
 
   return {
     filteredProducts,
