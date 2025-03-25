@@ -26,7 +26,10 @@ const useLogin = () => {
       navigate('/')
       login(data.token)
       toast.success(`Usuario logueado exitosamente`)
-    }
+    },
+    onError(error: { response: { data: string } }) {
+      toast.error(error.response.data)
+    },
   })
 
   const form = useForm<FormData>({

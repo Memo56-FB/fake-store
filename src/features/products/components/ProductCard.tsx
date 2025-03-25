@@ -7,7 +7,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Loader2 } from 'lucide-react'
 
 export const ProductCardLoading = () => (
-  <Skeleton className="rounded-xl w-full h-[380px] md:h-full bg-white shadow grid place-items-center"> 
+  <Skeleton className="rounded-xl w-full h-[380px] md:h-full bg-white shadow grid place-items-center">
+    <span className='sr-only'>Loading</span>
     <Loader2 className="animate-spin" size={48} />
   </Skeleton>
 )
