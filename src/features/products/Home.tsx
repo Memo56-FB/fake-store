@@ -3,14 +3,27 @@ import { useMediaQuery } from 'usehooks-ts'
 import { FiltersDrawer } from "./components/FiltersDrawer"
 
 import useProducts from "./hooks/useProducts"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { ProductCard, ProductCardLoading } from "./components/ProductCard"
 
 import eagleWearLogo from '@/assets/EagleWearLogo.png'
+import usePagintionProducts from "./hooks/usePaginationProducts"
+import { PaginationProducts } from "./components/PaginationProducts"
 
 export const Home = () => {
   const { filteredProducts, isLoading } = useProducts()
+  const { productsPerPage, currentPage, startTransition, setCurrentPage, isPending } = usePagintionProducts()
+
+
+  const currentProducts = useMemo(() => {
+    const indexOfFirstProduct = (currentPage - 1) * productsPerPage
+    const indexOfLastProduct = indexOfFirstProduct + productsPerPage
+
+    return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+
+  }, [filteredProducts, currentPage, productsPerPage])
+
   const queryClient = useQueryClient()
   useEffect(() => {
     queryClient.invalidateQueries({
@@ -37,24 +50,33 @@ export const Home = () => {
 
         }
         {/* Product grid */}
-        {(filteredProducts.length === 0 && !isLoading) ? (
+        {(currentProducts.length === 0 && !isLoading) ? (
           <div className="text-center py-12">
             <h3 className="text-lg font-medium">No se encontraron productos</h3>
             <p className="text-muted-foreground">Intenta con otros filtros</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-8 items-start">
-            {isLoading ?
+            {(isLoading || isPending) ?
               Array.from({ length: 4 }).map((_, i) => (
                 <ProductCardLoading key={i} />
               ))
               :
-              filteredProducts.map((product) => (
+              currentProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))
             }
           </div>
         )}
+        {Math.ceil(filteredProducts.length / productsPerPage) > 1 &&
+          <PaginationProducts
+            productsPerPage={productsPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            startTransition={startTransition}
+            filteredProducts={filteredProducts}
+          />
+        }
       </div>
     </section>
   )
