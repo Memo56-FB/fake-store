@@ -11,18 +11,21 @@ import {
 import { Dot, ShoppingCart } from "lucide-react"
 import { useCartStore } from "./cartStore"
 import { DrawerCard } from "./components/DrawerCard"
+import { Link } from "react-router"
+import { useState } from "react"
 
 export const ShoppingCartDrawer = () => {
   const cartProducts = useCartStore(state => state.products)
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
-    <Drawer direction="right">
+    <Drawer open={open} onOpenChange={setOpen} direction="right">
       <DrawerTrigger>
         <div className="relative">
           {cartProducts.length > 0 &&
-            <Dot size={50} className="text-red-600 cursor-pointer absolute -left-7 -top-5 z-10 " /> 
+            <Dot size={50} className="text-red-600 cursor-pointer absolute -left-7 -top-5 z-10 " />
           }
-            <ShoppingCart className="cursor-pointer" />
+          <ShoppingCart className="cursor-pointer" />
         </div>
       </DrawerTrigger>
       <DrawerContent>
@@ -43,7 +46,9 @@ export const ShoppingCartDrawer = () => {
               cartProducts.reduce((acc, product) => acc + product.price, 0).toFixed(2)
             }
           </p>
-          <Button>Ir a pagar</Button>
+          <Link to={'/cart'}>
+            <Button className="w-full" onClick={() => setOpen(false)}>Ir a pagar</Button>
+          </Link>
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>

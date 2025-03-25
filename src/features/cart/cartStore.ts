@@ -6,6 +6,7 @@ interface CartState {
   products: ProductType[]
   addProduct: (products: ProductType) => void
   deleteProduct: (id: string) => void
+  deleteAllProducts: () => void
 }
 
 export const useCartStore = create<CartState>()(
@@ -13,7 +14,8 @@ export const useCartStore = create<CartState>()(
     (set) => ({
       products: [],
       addProduct: (product: ProductType) => set(prev => ({ products: [...prev.products, product] })),
-      deleteProduct: (id: string) => set(prev => ({ products: prev.products.filter((product) => product.id !== +id) }))
+      deleteProduct: (id: string) => set(prev => ({ products: prev.products.filter((product) => product.id !== +id) })),
+      deleteAllProducts: () => set({ products: [] })
     }),
     {
       name: 'cartProducts',
