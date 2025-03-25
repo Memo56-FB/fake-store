@@ -13,6 +13,7 @@ import { useCartStore } from "./cartStore"
 import { DrawerCard } from "./components/DrawerCard"
 import { Link } from "react-router"
 import { useState } from "react"
+import { formatTotal } from "./utils/formatTotal"
 
 export const ShoppingCartDrawer = () => {
   const cartProducts = useCartStore(state => state.products)
@@ -43,7 +44,7 @@ export const ShoppingCartDrawer = () => {
           <p className="text-xl font-semibold">
             Total: $
             {
-              cartProducts.reduce((acc, product) => acc + product.price, 0).toFixed(2)
+              formatTotal(cartProducts) 
             }
           </p>
           <Link to={'/cart'}>

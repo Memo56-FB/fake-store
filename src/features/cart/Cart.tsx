@@ -4,6 +4,7 @@ import { CartCard } from "./components/CartCard"
 import { useMutation } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router"
+import { formatTotal } from "./utils/formatTotal"
 
 export const Cart = () => {
   const cartProducts = useCartStore(state => state.products)
@@ -33,7 +34,8 @@ export const Cart = () => {
       </div>
       <div className="p-4 md:row-start-1 md:bg-white md:col-span-6">
         <h1 className="text-xl">Carrito</h1>
-        <p className="text-2xl font-semibold">Total: $ {cartProducts.reduce((acc, product) => acc + product.price, 0).toFixed(2)}</p>
+        <p className="text-2xl font-semibold">Total: $ 
+          {formatTotal(cartProducts)}</p>
         <p className="text-muted-foreground text-sm mb-4">
           Aquí podrás ver los productos que has agregado al carrito
         </p>
