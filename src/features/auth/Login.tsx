@@ -18,8 +18,8 @@ export const Login = () => {
 
   return (
     <main className="flex flex-col p-4 pt-1 h-dvh bg-gray-50 justify-center">
-      <img src={eagleLogo} loading="lazy" alt="eaglewear logo" className="aspect-square w-24 mb-2 mx-auto" />
-      <Card>
+      <img src={eagleLogo} loading="lazy" alt="eaglewear logo" className="aspect-square w-24 mb-2 mx-auto md:w-36 md:mb-10" />
+      <Card className="md:mx-auto">
         <CardHeader>
           <CardTitle className="text-center font-bold text-2xl">Acceder</CardTitle>
         </CardHeader>
