@@ -6,10 +6,14 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { House, Loader2, Store } from "lucide-react"
 import { useMediaQuery } from "usehooks-ts"
 import { Separator } from "@radix-ui/react-separator"
+import { useCartStore } from "../cart/cartStore"
+import { ProductType } from "@/types/productsType"
+import toast from "react-hot-toast"
 
 export const ProductDetail = () => {
   const { data, isLoading } = useProductDetail()
   const isDesktop = useMediaQuery("(min-width: 1024px)")
+  const addProduct = useCartStore(state => state.addProduct)
 
   if (isLoading) {
     return (
@@ -76,7 +80,13 @@ export const ProductDetail = () => {
 
             </div>
           }
-          <Button className="bg-yellow-300 text-black rounded-xl w-full">
+          <Button
+            className="bg-yellow-300 text-black rounded-xl w-full hover:bg-yellow-300/80"
+            onClick={() => {
+              addProduct(data ?? {} as ProductType)
+              toast.success("Producto agregado al carrito")
+            }}
+          >
             Agregar al carrito
           </Button>
         </div>
