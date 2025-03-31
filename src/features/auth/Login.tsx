@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import eagleLogo from "../../assets/EagleWearLogo.png"
 import useLogin from "./hooks/useLogin"
 import { Link } from "react-router"
 
@@ -18,7 +17,6 @@ export const Login = () => {
 
   return (
     <main className="flex flex-col p-4 pt-1 h-dvh bg-gray-50 justify-center">
-      <img src={eagleLogo} loading="lazy" alt="eaglewear logo" className="aspect-square w-24 mb-2 mx-auto md:w-36 md:mb-10" />
       <Card className="md:mx-auto">
         <CardHeader>
           <CardTitle className="text-center font-bold text-2xl">Acceder</CardTitle>

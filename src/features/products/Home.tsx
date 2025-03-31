@@ -7,7 +7,6 @@ import { useEffect, useMemo } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { ProductCard, ProductCardLoading } from "./components/ProductCard"
 
-import eagleWearLogo from '@/assets/EagleWearLogo.png'
 import usePagintionProducts from "./hooks/usePaginationProducts"
 import { PaginationProducts } from "./components/PaginationProducts"
 
@@ -39,7 +38,6 @@ export const Home = () => {
           <h1 className="text-3xl text-center font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
             Lo último en moda
           </h1>
-          <img src={eagleWearLogo} alt="eagle wear logo" className="w-40 md:w-60" />
         </div>
       </div>
       <div className="grid md:grid-cols-[auto_1fr]">

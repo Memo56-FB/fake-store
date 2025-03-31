@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <header className='sticky top-0 z-50 bg-white shadow w-full flex p-4 items-center justify-between'>
       <Link to="/">
-        <h2 className='font-bold text-2xl'>Eagle<span className='text-red-600'>Wear</span></h2>
+        <h2 className='font-bold text-2xl'>Fake<span className='text-purple-800'> Store</span></h2>
       </Link>
       <div className='flex gap-4'>
         <button onClick={logout}>

@@ -1,11 +1,9 @@
-import eagleBranding from '@/assets/EagleWearBranding.png'
 
 export const Footer = () => {
   return (
-    <footer className='bg-gray-800 text-white p-4'>
-      <img src={eagleBranding} alt="eaglewear logo" className="aspect-video w-32 mb-2 mx-auto" />
+    <footer className='bg-purple-950 text-white p-4'>
       <p className='text-center text-sm'>
-        &copy; Eagle Wear 2025
+        Fake Store Api by <a className="font-semibold" href="https://linkedin.com/in/keikaavousi">MohammadReza Keikavousi</a>
       </p>
     </footer>
   )
