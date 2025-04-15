@@ -2,6 +2,16 @@ import { http, HttpResponse } from 'msw'
 
 
 export const handlers = [
+  // ? Auth
+  http.post('https://fakestoreapi.com/auth/login', async ({ request }: { request: Request }) => {
+    const { username, password} = await request.json()
+    if (username === 'WrongUser' && password === 'WrongPassword') {
+      return HttpResponse.json('username or password is incorrect', { status: 401 })
+    }
+    return HttpResponse.json({ token: 'valid_token' }, { status: 200 })
+  }),
+
+  // ? Products
   http.get('https://fakestoreapi.com/products', () => {
     return HttpResponse.json([
       {
@@ -17,6 +27,5 @@ export const handlers = [
         }
       },
     ])
-  })
-
+  }),
 ]
