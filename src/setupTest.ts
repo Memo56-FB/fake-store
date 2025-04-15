@@ -1,6 +1,5 @@
-import { afterAll, afterEach, beforeAll, vi } from "vitest";
-import { cleanup } from "@testing-library/react";
-import { server } from "./mocks/server";
+import { vi, afterAll, afterEach, beforeAll } from "vitest";
+import { server } from './mocks/server' 
 
 Object.defineProperty(window, 'matchMedia', {
   value: () => ({
@@ -9,11 +8,6 @@ Object.defineProperty(window, 'matchMedia', {
   }),
 })
 
-
-
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
-afterEach(() => {
-  server.resetHandlers();
-  cleanup();
-});
-afterAll(() => server.close());
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())

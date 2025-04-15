@@ -1,26 +1,22 @@
 import { http, HttpResponse } from 'msw'
 
-const allProducts = [
-  { id: 1, title: 'Producto 1', category: 'Electrónica', description: 'Descripción del producto 1', price: 100, rating: { rate: 4.5, count: 100} }
-]
 
 export const handlers = [
-  // ?Login
-  http.post('https://fakestoreapi.com/auth/login', async ({ request }: { request: Request }) => {
-    const { email, password } = await request.json()
-  
-    if (email === 'usuario@test.com' && password === 'password123') {
-      return HttpResponse.json({ id: 1 })
-    }
-    return new HttpResponse(JSON.stringify({ message: 'Credenciales inválidas' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' }
-    })
-  }),
-
-
-  // ? Products
-  http.get('https://fakestoreapi.com/products', async () => {
-    return HttpResponse.json(allProducts)
+  http.get('https://fakestoreapi.com/products', () => {
+    return HttpResponse.json([
+      {
+        "id": 1,
+        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+        "price": 109.95,
+        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "category": "men's clothing",
+        "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        "rating": {
+          "rate": 3.9,
+          "count": 120
+        }
+      },
+    ])
   })
+
 ]
