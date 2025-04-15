@@ -20,7 +20,7 @@ interface FilterProductsState {
   handleCategoryChange: (category: string) => void
   priceSort: string
   setPriceSort: (sort: string) => void
-  priceRange: [number, number]
+  priceRange: number[]
   setPriceRange: (range: [number, number]) => void
   ratingFilter: number
   setRatingFilter: (rating: number) => void
