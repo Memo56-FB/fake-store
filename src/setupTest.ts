@@ -1,5 +1,6 @@
 import { vi, afterAll, afterEach, beforeAll } from "vitest";
 import { server } from './mocks/server' 
+import '@testing-library/jest-dom';
 
 Object.defineProperty(window, 'matchMedia', {
   value: () => ({

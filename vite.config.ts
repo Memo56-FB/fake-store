@@ -19,6 +19,7 @@ export default defineConfig({
         '**/*.config.js',
         '**/types',
         '**/dist',
+        '**/main.tsx'
       ],
       // thresholds: {
       //   functions: 80

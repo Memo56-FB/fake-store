@@ -4,6 +4,7 @@ export const NotFound = () => {
   return (
     <main className='grid place-items-center h-dvh'>
       <img className='max-h-screen' src={error404} alt="Page not found" />
+      <p className='sr-only'>Página no encontrada</p>
     </main> 
   )
 }
