@@ -11,6 +11,10 @@ export const handlers = [
     return HttpResponse.json({ token: 'valid_token' }, { status: 200 })
   }),
 
+  http.post('https://fakestoreapi.com/users', async () => {
+    return HttpResponse.json({ id: 11 })
+  }),
+
   // ? Products
   http.get('https://fakestoreapi.com/products', () => {
     return HttpResponse.json([

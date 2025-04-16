@@ -1,16 +1,7 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { Login } from "../Login";
-import { MemoryRouter } from "react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "react-hot-toast";
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false
-    }
-  }
-})
+import { WrapperTest } from "@/test-utils/WrapperTest";
 
 vi.mock('react-router', async () => {
   const actual = await vi.importActual('react-router')
@@ -23,32 +14,9 @@ vi.mock('react-router', async () => {
 const mockNavigate = vi.fn()
 
 const renderLogin = () => render(
-  <MemoryRouter>
-    <QueryClientProvider client={queryClient}>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        gutter={8}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          // Define default options
-          className: '',
-          duration: 5000,
-          removeDelay: 1000,
-          // Default options for specific types
-          success: {
-            duration: 3000,
-            iconTheme: {
-              primary: 'green',
-              secondary: 'white',
-            },
-          },
-        }}
-      />
-      <Login />
-    </QueryClientProvider>
-  </MemoryRouter>
+  <WrapperTest>
+    <Login />
+  </WrapperTest>
 )
 
 describe('<Login />', () => {
